@@ -20,11 +20,17 @@ const exp = {
   star_5: by(c => c[3] === 5), star_4: by(c => c[3] === 4), star_3: by(c => c[3] === 3),
   spoken: by(c => c[2] === '口語'),
 };
+// 口語分類：從 index.html 的 SPOKEN_CATS 讀出 id，字數從 BUILTIN_CARDS 第 5 欄算
+const catIds = [...html.matchAll(/\{ id: "(\w+)",\s+icon: "[^"]+",\s+name: "[^"]+" \}/g)].map(m => m[1]);
+for (const id of catIds) exp['spoken_' + id] = by(c => c[2] === '口語' && c[4] === id);
+const uncategorised = by(c => c[2] === '口語' && !c[4]);
 let fail = 0;
 const ok = (name, cond, extra = '') => { if (!cond) fail++; console.log((cond ? 'PASS ' : 'FAIL ') + name + (extra ? '  -> ' + extra : '')); };
 
 (async () => {
-  console.log(`檔案：${FILE}\n版本：${ver}｜卡片：${N}｜口語：${exp.spoken}\n`);
+  console.log(`檔案：${FILE}\n版本：${ver}｜卡片：${N}｜口語：${exp.spoken}｜口語分類：${catIds.length} 類\n`);
+  ok('口語卡片都有分類', uncategorised === 0 && catIds.length > 0, `未分類 ${uncategorised} 張`);
+  ok('各分類字數加總 = 口語單元總字數', catIds.reduce((a, id) => a + exp['spoken_' + id], 0) === exp.spoken);
   const b = await chromium.launch();
 
   // ================= 電腦 =================
