@@ -1,0 +1,211 @@
+# 簡訊縮寫資料：縮寫|全寫|中文|例句英|例句中|分類|唸法(空白=逐字母唸；有字=照該字唸；-=不附音標)
+# 分類：react 情緒與態度 / chat 日常聊天 / social 社群網路 / work 工作與場合 / spell 數字與字母拼法
+LOL|laugh out loud|大笑（也常用來緩和語氣）|LOL, that video is hilarious!|哈哈，那個影片太好笑了！|react|
+LMAO|laughing my a** off|笑翻了|LMAO, I can't believe he did that.|笑死，我不敢相信他居然那樣做。|react|
+ROFL|rolling on the floor laughing|笑到在地上打滾|ROFL, send me that meme again.|笑翻了，再傳一次那個迷因給我。|react|
+OMG|oh my god|我的天啊|OMG, you got the job!|我的天啊，你得到那份工作了！|react|
+WTH|what the heck|搞什麼啊|WTH, why is the store closed?|搞什麼，店為什麼沒開？|react|
+SMH|shaking my head|搖頭（表示無言、失望）|He forgot again, SMH.|他又忘了，真是無言。|react|
+IKR|I know, right|我懂吧；對吧|This weather is crazy. — IKR!|這天氣太誇張了。——對吧！|react|
+IDK|I don't know|我不知道|IDK, maybe we should ask her.|我不知道，也許該問問她。|react|
+IDC|I don't care|我不在乎|Pizza or tacos? IDC, you choose.|披薩還是塔可？我都行，你決定。|react|
+IDGI|I don't get it|我不懂|Why is that funny? IDGI.|那個哪裡好笑？我不懂。|react|
+IDEK|I don't even know|我自己都不知道|Why did I buy this? IDEK.|我為什麼買這個？我自己都不知道。|react|
+NVM|never mind|算了|NVM, I found my keys.|算了，我找到鑰匙了。|react|
+TBH|to be honest|老實說|TBH, I didn't like the ending.|老實說，我不喜歡結局。|react|
+NGL|not gonna lie|不騙你|NGL, that was delicious.|不騙你，那真好吃。|react|
+IMO|in my opinion|依我看|IMO, the first one is better.|依我看，第一個比較好。|react|
+IMHO|in my humble opinion|依我淺見|IMHO, we should wait a week.|依我淺見，我們該等一週。|react|
+ICBW|I could be wrong|我可能錯了|It's due Friday, ICBW.|截止日是週五，我可能記錯了。|react|
+FR|for real|真的；認真的|That was the best concert, FR.|那是最棒的演唱會，真的。|react|
+FTW|for the win|太讚了；讚爆|Pizza for dinner, FTW!|晚餐吃披薩，太讚了！|react|
+JK|just kidding|開玩笑的|I'm leaving you the bill. JK!|帳單留給你付喔——開玩笑的！|react|
+NBD|no big deal|沒什麼大不了|Sorry I'm late. — NBD.|抱歉我遲到了。——沒事。|react|
+NP|no problem|沒問題|Thanks for helping! — NP.|謝謝你幫忙！——小事。|react|
+OTT|over the top|太誇張；過頭了|That wedding was totally OTT.|那場婚禮真的太誇張了。|react|
+TFW|that feeling when|那種感覺（當……）|TFW you find money in your coat.|在外套裡找到錢的那種感覺。|react|
+MFW|my face when|我的表情（當……）|MFW the Wi-Fi goes down again.|Wi-Fi 又斷線時我的表情。|react|
+TMI|too much information|資訊太多（說太多隱私了）|TMI! I didn't need to know that.|資訊太多了！我不需要知道這個。|react|
+DGMW|don't get me wrong|別誤會|DGMW, I like him, but he's late a lot.|別誤會，我喜歡他，但他常遲到。|react|
+ISTR|I seem to recall|我好像記得|ISTR the meeting is at ten.|我好像記得會議是十點。|react|
+IIRC|if I recall correctly|如果我沒記錯|IIRC, she lives downtown.|如果我沒記錯，她住在市中心。|react|
+AFAIK|as far as I know|據我所知|AFAIK, the store opens at nine.|據我所知，這家店九點開門。|react|
+FWIW|for what it's worth|僅供參考|FWIW, I think you made the right call.|僅供參考，我覺得你做對了決定。|react|
+TBF|to be fair|公平地說|TBF, he did say sorry.|公平地說，他確實道歉了。|react|
+OBVS|obviously|顯然|OBVS I'm coming to your party.|我當然會去你的派對。|react|obviously
+SRSLY|seriously|認真地；真的假的|SRSLY, you ate the whole cake?|真的假的，你把整個蛋糕吃光了？|react|seriously
+OFC|of course|當然|Can you pick me up? — OFC.|你可以來接我嗎？——當然。|react|
+SOZ|sorry|抱歉（口語拼法）|Soz, I'm running late.|抱歉，我會晚到。|react|sorry
+OIC|oh, I see|喔，我懂了|OIC, that's why it was closed.|喔，我懂了，難怪它沒開。|react|
+BTDT|been there, done that|我經歷過了|Camping in the rain? BTDT.|雨中露營？我經歷過了。|react|
+WTG|way to go|做得好|You passed? WTG!|你通過了？做得好！|react|
+WTV|whatever|隨便；都可以|Pizza, tacos, WTV works.|披薩、塔可，隨便都行。|react|whatever
+KK|okay, okay|好啦好啦|KK, I'll do it now.|好啦好啦，我現在就做。|react|okay okay
+YOLO|you only live once|人生只有一次|Let's go skydiving. YOLO!|我們去跳傘吧，人生只有一次！|react|yo low
+FOMO|fear of missing out|害怕錯過|I have FOMO when I see their trip photos.|看到他們的旅行照片，我就怕錯過。|react|foe moe
+JOMO|joy of missing out|錯過的快樂（享受不去的自在）|Staying in tonight. JOMO!|今晚待在家，享受不去的快樂！|react|joe moe
+IYKYK|if you know, you know|懂的人自然懂|That inside joke? IYKYK.|那個內部梗？懂的人自然懂。|react|
+BAE|before anyone else|摯愛；寶貝（暱稱）|Dinner with bae tonight.|今晚和我的寶貝吃晚餐。|react|bay
+GOAT|greatest of all time|史上最強|She is the GOAT of tennis.|她是網球史上最強。|react|goat
+RIP|rest in peace|安息|RIP my old phone. It fell in the water.|我的舊手機安息吧，它掉進水裡了。|react|
+BRB|be right back|馬上回來|BRB, someone's at the door.|馬上回來，有人在敲門。|chat|
+BBL|be back later|晚點回來|BBL, I'm going to the gym.|晚點回來，我要去健身房。|chat|
+BBS|be back soon|很快回來|BBS, grabbing a coffee.|很快回來，我去拿杯咖啡。|chat|
+BBIAB|be back in a bit|過一會兒回來|BBIAB, my lunch is ready.|過一會兒回來，我的午餐好了。|chat|
+GTG|got to go|我得走了|GTG, my bus is here.|我得走了，我的公車來了。|chat|
+G2G|got to go|我得走了|G2G, talk later!|我得走了，晚點聊！|chat|G two G
+TTYL|talk to you later|晚點聊|TTYL, I'm driving now.|晚點聊，我正在開車。|chat|
+TTYS|talk to you soon|很快再聊|Thanks for the call. TTYS!|謝謝你來電，很快再聊！|chat|
+TTYT|talk to you tomorrow|明天聊|Good night, TTYT.|晚安，明天聊。|chat|
+TTFN|ta-ta for now|暫時再見|I have to run. TTFN!|我得走了，先再見啦！|chat|
+CYA|see ya|再見|CYA tomorrow!|明天見！|chat|
+CU|see you|再見|CU at the cafe at five.|五點咖啡廳見。|chat|see you
+SYS|see you soon|很快見|SYS, safe trip!|很快見，一路平安！|chat|
+SYL|see you later|待會見|SYL at the gym.|健身房待會見。|chat|
+BFN|bye for now|先再見|BFN, my battery is dying.|先再見，我的電量快沒了。|chat|
+ATM|at the moment|目前|I'm busy ATM. Call you later.|我現在在忙，晚點打給你。|chat|
+RN|right now|現在|I'm at the store RN.|我現在在店裡。|chat|
+OMW|on my way|我在路上|OMW, five minutes away.|我在路上，還有五分鐘。|chat|
+WYD|what are you doing|你在做什麼|Hey, WYD this weekend?|嘿，你這個週末要做什麼？|chat|
+WBU|what about you|那你呢|I'm good. WBU?|我很好。你呢？|chat|
+HBU|how about you|那你呢|I'm tired. HBU?|我很累。你呢？|chat|
+HRU|how are you|你好嗎|Hey! HRU?|嘿！你好嗎？|chat|
+WRU|where are you|你在哪|WRU? We're waiting.|你在哪？我們在等你。|chat|
+WYA|where you at|你在哪裡|WYA? I'm at the entrance.|你在哪？我在入口。|chat|
+WDYM|what do you mean|你是什麼意思|WDYM it's cancelled?|什麼叫取消了？|chat|
+AYT|are you there|你在嗎|AYT? I need your help.|你在嗎？我需要你幫忙。|chat|
+LMK|let me know|讓我知道|LMK if you need help.|需要幫忙就告訴我。|chat|
+HMU|hit me up|聯絡我；找我|HMU when you're free.|你有空時找我。|chat|
+AFK|away from keyboard|暫時離開（鍵盤前）|AFK for ten minutes.|我離開十分鐘。|chat|
+IRL|in real life|現實生活中|We should meet IRL sometime.|我們找時間現實中見面吧。|chat|
+BFF|best friends forever|永遠的好朋友|She's my BFF.|她是我的摯友。|chat|
+BFFL|best friends for life|一輩子的好朋友|Happy birthday to my BFFL!|祝我一輩子的好朋友生日快樂！|chat|
+BF|boyfriend|男朋友|My BF is cooking tonight.|我男朋友今晚下廚。|chat|
+GF|girlfriend|女朋友|His GF is really nice.|他女朋友人很好。|chat|
+SO|significant other|另一半|I'm bringing my SO to the party.|我會帶另一半去派對。|chat|
+BTW|by the way|順帶一提|BTW, the meeting moved to three.|順帶一提，會議改到三點了。|chat|
+NM|not much|沒什麼|What's up? — NM.|最近怎樣？——沒什麼。|chat|
+HBD|happy birthday|生日快樂|HBD! Have a great day.|生日快樂！祝你有美好的一天。|chat|
+HNY|happy new year|新年快樂|HNY, everyone!|大家新年快樂！|chat|
+GM|good morning|早安|GM! Coffee time.|早安！咖啡時間。|chat|
+GN|good night|晚安|GN, see you tomorrow.|晚安，明天見。|chat|
+WB|welcome back|歡迎回來|WB! How was the trip?|歡迎回來！旅行如何？|chat|
+ILY|I love you|我愛你|ILY, Mom.|媽，我愛你。|chat|
+ILU|I love you|我愛你|ILU so much.|我好愛你。|chat|
+ILY2|I love you too|我也愛你|ILY. — ILY2!|我愛你。——我也愛你！|chat|I love you too
+XOXO|hugs and kisses|抱抱親親|Miss you. XOXO|想你。抱抱親親。|chat|
+PDA|public display of affection|在公共場合親熱|No PDA in the office, please.|辦公室裡請不要公開親熱。|chat|
+LDR|long-distance relationship|遠距離戀愛|They've been in an LDR for two years.|他們遠距離戀愛兩年了。|chat|
+DTR|define the relationship|確認關係（談清楚是什麼關係）|It's time for a DTR talk.|該談談我們是什麼關係了。|chat|
+HAND|have a nice day|祝你有美好的一天|Thanks for stopping by. HAND!|謝謝你來，祝你有美好的一天！|chat|
+HTH|hope this helps|希望有幫助|Here's the link. HTH!|這是連結，希望有幫助！|chat|
+JC|just curious|只是好奇|Why did you move? JC.|你為什麼搬家？只是好奇。|chat|
+TY|thank you|謝謝|TY for the ride!|謝謝你載我！|chat|thank you
+YW|you're welcome|不客氣|Thanks! — YW.|謝謝！——不客氣。|chat|you're welcome
+TYVM|thank you very much|非常感謝|TYVM for dinner.|非常感謝你請吃晚餐。|chat|
+PPL|people|人們|So many PPL at the mall.|購物中心人好多。|chat|people
+PROB|probably|大概|I'll PROB be late.|我大概會遲到。|chat|probably
+DEF|definitely|一定；絕對|I'm DEF coming.|我一定會去。|chat|definitely
+HW|homework|家庭作業|I still have HW to finish.|我還有作業沒寫完。|chat|homework
+NOYB|none of your business|不關你的事|Where did I go? NOYB.|我去了哪裡？不關你的事。|chat|
+TBC|to be continued|待續|I'll finish the story later. TBC.|故事我晚點說完，待續。|chat|
+DM|direct message|私訊|DM me the details.|把細節私訊給我。|social|
+PM|private message|私訊|PM me your email.|把你的電子郵件私訊我。|social|
+OP|original poster|原發文者|OP posted a great photo.|原發文者貼了一張很棒的照片。|social|
+TIL|today I learned|我今天才知道|TIL octopuses have three hearts.|我今天才知道章魚有三顆心臟。|social|
+ELI5|explain like I'm five|用簡單的方式解釋|ELI5: how do vaccines work?|用簡單的方式解釋：疫苗是怎麼運作的？|social|E L I five
+AMA|ask me anything|問我任何事|I'm a pilot. AMA!|我是飛行員，問我任何事！|social|
+OOTD|outfit of the day|今日穿搭|OOTD: jeans and a white shirt.|今日穿搭：牛仔褲和白襯衫。|social|
+TBT|throwback Thursday|週四回顧老照片|TBT to our trip in 2019.|週四回顧，2019 年的旅行。|social|
+FBF|flashback Friday|週五回顧|FBF to my high school days.|週五回顧我的高中時光。|social|
+POV|point of view|觀點；第一人稱視角|POV: you just missed the bus.|視角：你剛錯過公車。|social|
+ICYMI|in case you missed it|以防你錯過|ICYMI, the video is online.|以防你錯過，影片已經上線了。|social|
+RT|retweet|轉推|Please RT this post.|請轉推這篇貼文。|social|
+FB|Facebook|臉書|Add me on FB.|在臉書加我。|social|
+IG|Instagram|Instagram|Follow me on IG.|在 IG 追蹤我。|social|
+YT|YouTube|YouTube|I watched it on YT.|我在 YouTube 看的。|social|
+SM|social media|社群媒體|I'm taking a break from SM.|我暫時不用社群媒體。|social|
+PFP|profile picture|大頭貼|New PFP, what do you think?|新的大頭貼，你覺得怎麼樣？|social|
+FYP|for you page|為你推薦頁（TikTok）|That video was on my FYP.|那支影片出現在我的為你推薦頁。|social|
+TLDR|too long; didn't read|太長沒看（懶人包）|TLDR: the store is closed.|懶人包：店關了。|social|T L D R
+FAQ|frequently asked questions|常見問題|Check the FAQ first.|先看常見問題。|social|
+AKA|also known as|又名；也被稱為|Robert, AKA Bob.|羅伯特，又叫鮑伯。|social|
+DIY|do it yourself|自己動手做|This is a DIY project.|這是個自己動手做的專案。|social|
+GG|good game|打得好（遊戲結束時）|GG, you played well.|打得好，你玩得不錯。|social|
+GLHF|good luck, have fun|祝好運、玩得開心|GLHF, everyone!|大家祝好運、玩得開心！|social|
+FPS|first-person shooter|第一人稱射擊遊戲|He loves FPS games.|他愛玩第一人稱射擊遊戲。|social|
+RPG|role-playing game|角色扮演遊戲|This RPG has a huge map.|這款角色扮演遊戲地圖很大。|social|
+OT|off topic|離題|OT, but where did you buy that?|離題一下，但你那個在哪買的？|social|
+SFW|safe for work|適合工作場合|Is this link SFW?|這個連結適合在工作時開嗎？|social|
+NSFW|not safe for work|不適合工作場合|Warning: NSFW.|警告：不適合工作場合。|social|
+OOMF|one of my followers|我的某位追蹤者|OOMF just posted a great recipe.|我的一位追蹤者剛貼了很棒的食譜。|social|-
+ASAP|as soon as possible|儘快|Please reply ASAP.|請儘快回覆。|work|
+FYI|for your information|供你參考|FYI, the deadline moved.|供你參考，截止日期改了。|work|
+ETA|estimated time of arrival|預計抵達時間|What's your ETA?|你預計幾點到？|work|
+EOD|end of day|今天下班前|I'll send it by EOD.|我今天下班前會寄給你。|work|
+EOW|end of week|本週結束前|Report due EOW.|報告本週結束前要交。|work|
+COB|close of business|下班前（營業結束前）|Please finish by COB.|請在下班前完成。|work|
+OOO|out of office|不在辦公室|I'm OOO until Monday.|我到週一前都不在辦公室。|work|
+WFH|work from home|在家工作|I'm WFH today.|我今天在家工作。|work|
+WIP|work in progress|進行中的工作|This draft is a WIP.|這份草稿還在進行中。|work|
+TBA|to be announced|待公布|The venue is TBA.|場地待公布。|work|
+TBD|to be determined|待決定|The date is TBD.|日期待決定。|work|
+RSVP|please reply (répondez s'il vous plaît)|請回覆（是否出席）|Please RSVP by Friday.|請在週五前回覆是否出席。|work|
+BYOB|bring your own bottle (beer)|自備飲料（酒）|The party is BYOB.|這場派對請自備飲料。|work|
+DND|do not disturb|請勿打擾|Phone on DND during the meeting.|開會時手機設為勿擾。|work|
+ROI|return on investment|投資報酬率|What's the ROI on this ad?|這個廣告的投資報酬率是多少？|work|
+KPI|key performance indicator|關鍵績效指標|Our KPI is customer satisfaction.|我們的關鍵績效指標是顧客滿意度。|work|
+PTO|paid time off|帶薪休假|I'm taking PTO next week.|我下週要請帶薪假。|work|
+OTOH|on the other hand|另一方面|It's cheap; OTOH, it's slow.|它很便宜；另一方面，它很慢。|work|
+YMMV|your mileage may vary|結果可能因人而異|It worked for me, YMMV.|對我有用，但結果因人而異。|work|
+CC|carbon copy|副本（抄送）|CC me on the email.|把信副本寄給我。|work|
+BCC|blind carbon copy|密件副本|I'll BCC the team.|我會用密件副本寄給團隊。|work|
+RE|regarding|關於|RE: Monday's meeting|關於：週一的會議|work|
+PS|postscript|附註|PS: don't forget your ID.|附註：別忘了帶證件。|work|
+PPS|post-postscript|再附註|PPS: bring snacks!|再附註：帶點心來！|work|
+TGIF|thank God it's Friday|謝天謝地今天是週五|TGIF! Let's go out tonight.|謝天謝地週五了！今晚出去玩吧。|work|
+MIA|missing in action|失蹤；找不到人|Where's Tom? He's MIA.|湯姆呢？他不見人影。|work|
+KISS|keep it simple, stupid|保持簡單（設計原則）|Follow the KISS rule.|遵守保持簡單的原則。|work|kiss
+Q&A|questions and answers|問答|We'll have a Q&A after the talk.|演講後有問答時間。|work|Q and A
+B2B|business to business|企業對企業|We sell to B2B clients.|我們的客戶是企業。|work|B two B
+B2C|business to consumer|企業對消費者|Our B2C sales are growing.|我們的消費者業務在成長。|work|B two C
+VS|versus|對（比賽、比較）|Team A VS Team B|甲隊對乙隊|work|versus
+WFM|works for me|我可以|Friday at six? WFM.|週五六點？我可以。|work|
+SGTM|sounds good to me|聽起來不錯|Let's meet at noon. — SGTM.|中午見面吧。——聽起來不錯。|work|
+LGTM|looks good to me|我看沒問題|I read the draft. LGTM.|我看過草稿了，沒問題。|work|
+TIA|thanks in advance|先謝謝了|Can you send the link? TIA!|可以傳連結給我嗎？先謝謝了！|work|
+2DAY|today|今天|See you 2day at noon.|今天中午見。|spell|today
+2MORO|tomorrow|明天|Call me 2moro.|明天打給我。|spell|tomorrow
+2NITE|tonight|今晚|Party 2nite!|今晚有派對！|spell|tonight
+4EVER|forever|永遠|Friends 4ever.|永遠的朋友。|spell|forever
+B4|before|之前|Text me B4 you leave.|你出發前傳訊息給我。|spell|before
+GR8|great|很棒|That's GR8 news!|這真是好消息！|spell|great
+L8|late|遲到；晚|Sorry, I'm L8.|抱歉，我遲到了。|spell|late
+L8R|later|晚點|Talk L8R.|晚點聊。|spell|later
+CUL8R|see you later|待會見|Gotta run, CUL8R!|我得走了，待會見！|spell|see you later
+M8|mate|夥伴|Thanks, M8.|謝了，夥伴。|spell|mate
+W8|wait|等一下|W8 for me!|等等我！|spell|wait
+H8|hate|討厭|I H8 Mondays.|我討厭星期一。|spell|hate
+THX|thanks|謝謝|THX for the gift!|謝謝你的禮物！|spell|thanks
+THNX|thanks|謝謝|THNX a lot.|多謝了。|spell|thanks
+PLZ|please|請|Call me back, PLZ.|請回我電話。|spell|please
+PLS|please|請|PLS send the file.|請把檔案寄來。|spell|please
+THO|though|不過|It's fun, THO.|不過，它很好玩。|spell|though
+U|you|你|How are U?|你好嗎？|spell|you
+UR|your / you're|你的；你是|UR amazing!|你太棒了！|spell|your
+R|are|是（be 動詞）|How R things?|一切還好嗎？|spell|are
+Y|why|為什麼|Y are you late?|你為什麼遲到？|spell|why
+K|okay|好|Meet at six? — K.|六點見？——好。|spell|okay
+4U|for you|給你|This gift is 4U.|這個禮物是給你的。|spell|for you
+BCOZ|because|因為|I'm tired BCOZ I worked late.|我累是因為工作到很晚。|spell|because
+CUZ|because|因為|I left early CUZ I was sick.|我早走是因為不舒服。|spell|because
+NE1|anyone|任何人|Is NE1 coming?|有人要來嗎？|spell|anyone
+SOME1|someone|某人|SOME1 called you.|有人打給你。|spell|someone
+EZ|easy|簡單|This game is EZ.|這遊戲很簡單。|spell|easy
+XLNT|excellent|優秀|XLNT work!|做得太好了！|spell|excellent
+FAV|favorite|最愛|This is my FAV song.|這是我最愛的歌。|spell|favorite
+BDAY|birthday|生日|Happy BDAY!|生日快樂！|spell|birthday
+CONVO|conversation|對話|Great CONVO today.|今天聊得很愉快。|spell|conversation
+B/C|because|因為|I stayed in B/C of the rain.|因為下雨我待在家。|spell|because
+W/|with|和……一起|Coffee W/ milk.|加牛奶的咖啡。|spell|with
+W/O|without|沒有|Tea W/O sugar.|不加糖的茶。|spell|without

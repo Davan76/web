@@ -21,16 +21,21 @@ const exp = {
   spoken: by(c => c[2] === '口語'),
 };
 // 口語分類：從 index.html 的 SPOKEN_CATS 讀出 id，字數從 BUILTIN_CARDS 第 5 欄算
-const catIds = [...html.matchAll(/\{ id: "(\w+)",\s+icon: "[^"]+",\s+name: "[^"]+" \}/g)].map(m => m[1]);
+const block = n => new RegExp('const ' + n + ' = \\[([\\s\\S]*?)\\];').exec(html)[1];
+const idsOf = n => [...block(n).matchAll(/id: "(\w+)"/g)].map(m => m[1]);
+const catIds = idsOf('SPOKEN_CATS'), textIds = idsOf('TEXT_CATS');
+exp.text = by(c => c[2] === '簡訊');
 for (const id of catIds) exp['spoken_' + id] = by(c => c[2] === '口語' && c[4] === id);
-const uncategorised = by(c => c[2] === '口語' && !c[4]);
+for (const id of textIds) exp['text_' + id] = by(c => c[2] === '簡訊' && c[4] === id);
+const uncategorised = by(c => (c[2] === '口語' || c[2] === '簡訊') && !c[4]);
 let fail = 0;
 const ok = (name, cond, extra = '') => { if (!cond) fail++; console.log((cond ? 'PASS ' : 'FAIL ') + name + (extra ? '  -> ' + extra : '')); };
 
 (async () => {
-  console.log(`檔案：${FILE}\n版本：${ver}｜卡片：${N}｜口語：${exp.spoken}｜口語分類：${catIds.length} 類\n`);
+  console.log(`檔案：${FILE}\n版本：${ver}｜卡片：${N}｜口語：${exp.spoken}｜簡訊縮寫：${exp.text}｜口語分類 ${catIds.length} 類、簡訊分類 ${textIds.length} 類\n`);
   ok('口語卡片都有分類', uncategorised === 0 && catIds.length > 0, `未分類 ${uncategorised} 張`);
-  ok('各分類字數加總 = 口語單元總字數', catIds.reduce((a, id) => a + exp['spoken_' + id], 0) === exp.spoken);
+  ok('口語各分類字數加總 = 口語單元總字數', catIds.reduce((a, id) => a + exp['spoken_' + id], 0) === exp.spoken);
+  ok('簡訊各分類字數加總 = 簡訊縮寫總字數', textIds.reduce((a, id) => a + exp['text_' + id], 0) === exp.text);
   const b = await chromium.launch();
 
   // ================= 電腦 =================
