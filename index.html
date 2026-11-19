@@ -521,9 +521,9 @@
     .app-author a { color: inherit; }
 
     /* 訪客燈號 */
-    .visit-lights { display: none; justify-content: center; flex-wrap: wrap; gap: 14px; font-size: 12px; color: #334155; margin: 6px 0 2px; font-weight: 700; }
-    .visit-item { display: inline-flex; align-items: center; gap: 6px; }
-    .visit-light { display: inline-block; width: 13px; height: 13px; border-radius: 50%; box-shadow: 0 0 0 2px rgba(15,23,42,0.08), 0 0 6px currentColor; }
+    .visit-lights { display: none; justify-content: center; flex-wrap: wrap; gap: 12px; font-size: 10.5px; color: #94a3b8; margin: 4px 0 0; font-weight: 500; }
+    .visit-item { display: inline-flex; align-items: center; gap: 4px; }
+    .visit-light { display: inline-block; width: 7px; height: 7px; border-radius: 50%; opacity: 0.6; }
 
     .ver-notes {
       font-weight: 600;
@@ -3006,7 +3006,7 @@
 
     // 版本資訊：每次更新網頁時修改 APP_VERSION，用來確認線上已換成新版。
     // 規則：小改款用小數點（Ver.1.1、Ver.1.2），大改款進位為整數（Ver.2）。
-    const APP_VERSION = "Ver.5.2";
+    const APP_VERSION = "Ver.5.3";
     const APP_FEATURES = "新增簡訊縮寫 209 個（分 5 類）・口語單元 161 字（分 8 類）・訪客燈號・IPA 音標・字首字根字尾・手機按鈕";
     (function showVersion() {
       const el = document.getElementById("appVersion");
