@@ -1186,9 +1186,10 @@
       }
       .rank-dropdown {
         max-width: none;
-        font-size: 16px;
+        font-size: 16px;       /* 上限；實際大小由 fitRankDropdown() 依寬度自動縮小 */
         padding: 8px 8px;
         min-height: 44px;
+        text-overflow: clip;
       }
       .rank-stats-badge {
         display: none;   /* 手機上字數已在下拉選單裡顯示，隱藏以免擠掉選單文字 */
@@ -2187,6 +2188,7 @@
       }
 
       updateRankStatsBadge();
+      if (typeof fitRankDropdown === "function") fitRankDropdown();
     }
 
     function updateRankStatsBadge() {
@@ -2988,7 +2990,7 @@
 
     // 版本資訊：每次更新網頁時修改 APP_VERSION，用來確認線上已換成新版。
     // 規則：小改款用小數點（Ver.1.1、Ver.1.2），大改款進位為整數（Ver.2）。
-    const APP_VERSION = "Ver.4.1";
+    const APP_VERSION = "Ver.4.2";
     const APP_FEATURES = "新增簡訊縮寫 209 個（分 5 類）・口語單元 161 字（分 8 類）・IPA 音標・字首字根字尾・手機按鈕";
     (function showVersion() {
       const el = document.getElementById("appVersion");
@@ -3006,7 +3008,27 @@
       document.title = document.title.replace(/\s*\((v|Ver\.)[^)]*\)$/, "") + ` (${APP_VERSION})`;
     })();
 
-    window.addEventListener("resize", () => { if (typeof autoFitCardHeight === "function") autoFitCardHeight(); });
+    // 手機上目標級距選單的字體：依可用寬度自動縮放（16px 為上限，最小 11px）
+    function fitRankDropdown() {
+      const sel = document.getElementById("rankSelect");
+      if (!sel) return;
+      sel.style.fontSize = "";
+      if (!window.matchMedia("(max-width: 480px)").matches) return;
+      const opt = sel.options[sel.selectedIndex];
+      if (!opt) return;
+      const cs = getComputedStyle(sel);
+      const avail = sel.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - 30; // 30px 留給下拉箭頭
+      const ctx = document.createElement("canvas").getContext("2d");
+      let size = parseFloat(cs.fontSize);
+      while (size > 11) {
+        ctx.font = `${cs.fontWeight} ${size}px ${cs.fontFamily}`;
+        if (ctx.measureText(opt.textContent).width <= avail) break;
+        size -= 0.5;
+      }
+      sel.style.fontSize = size + "px";
+    }
+    document.getElementById("rankSelect").addEventListener("change", () => fitRankDropdown());
+    window.addEventListener("resize", () => { if (typeof autoFitCardHeight === "function") autoFitCardHeight(); fitRankDropdown(); });
     window.addEventListener("DOMContentLoaded", initApp);
   </script>
 </body>
