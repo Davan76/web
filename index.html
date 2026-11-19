@@ -520,6 +520,11 @@
     }
     .app-author a { color: inherit; }
 
+    /* 訪客燈號 */
+    .visit-lights { display: none; justify-content: center; flex-wrap: wrap; gap: 14px; font-size: 12px; color: #334155; margin: 6px 0 2px; font-weight: 700; }
+    .visit-item { display: inline-flex; align-items: center; gap: 6px; }
+    .visit-light { display: inline-block; width: 13px; height: 13px; border-radius: 50%; box-shadow: 0 0 0 2px rgba(15,23,42,0.08), 0 0 6px currentColor; }
+
     .ver-notes {
       font-weight: 600;
       font-size: 12px;
@@ -1454,6 +1459,8 @@
       <div class="ver-notes" id="verNotes" style="display:none"></div>
       <div class="app-author">Copyright © 2026 Davan Ruan｜授權：<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>（含 MorphoLex-en 資料）</div>
     </div>
+
+    <div class="visit-lights" id="visitLights"></div>
 
     <div class="data-credit">
       單字資料：<a href="https://huggingface.co/datasets/kknono668/toeic-vocab-tw" target="_blank" rel="noopener">kknono668/toeic-vocab-tw</a>
@@ -2999,8 +3006,8 @@
 
     // 版本資訊：每次更新網頁時修改 APP_VERSION，用來確認線上已換成新版。
     // 規則：小改款用小數點（Ver.1.1、Ver.1.2），大改款進位為整數（Ver.2）。
-    const APP_VERSION = "Ver.4.5";
-    const APP_FEATURES = "新增簡訊縮寫 209 個（分 5 類）・口語單元 161 字（分 8 類）・IPA 音標・字首字根字尾・手機按鈕";
+    const APP_VERSION = "Ver.5";
+    const APP_FEATURES = "新增簡訊縮寫 209 個（分 5 類）・口語單元 161 字（分 8 類）・訪客燈號・IPA 音標・字首字根字尾・手機按鈕";
     (function showVersion() {
       const el = document.getElementById("appVersion");
       if (el) el.textContent = `版本 ${APP_VERSION}｜${BUILTIN_CARDS.length.toLocaleString()} 字｜`;
@@ -3038,6 +3045,38 @@
     }
     document.getElementById("rankSelect").addEventListener("change", () => fitRankDropdown());
     window.addEventListener("resize", () => { if (typeof autoFitCardHeight === "function") autoFitCardHeight(); fitRankDropdown(); });
+    // ===== 訪客燈號 =====
+    // 部署 Worker 後把網址填在這裡（例如 "https://toeic-counter.你的帳號.workers.dev"）。留空 = 不顯示燈號。
+    const VISIT_API = "";
+    // 燈號顏色：數字落在哪一區，就亮哪一色（max 為該區上限）
+    const VISIT_LEVELS = [
+      { max: 9, color: "#ef4444", name: "紅" },
+      { max: 29, color: "#f97316", name: "橙" },
+      { max: 59, color: "#facc15", name: "黃" },
+      { max: 99, color: "#22c55e", name: "綠" },
+      { max: 199, color: "#3b82f6", name: "藍" },
+      { max: 499, color: "#4f46e5", name: "靛" },
+      { max: Infinity, color: "#a855f7", name: "紫" }
+    ];
+    function visitLevel(n) { return VISIT_LEVELS.find(l => n <= l.max); }
+    async function loadVisits() {
+      const box = document.getElementById("visitLights");
+      if (!box || !VISIT_API) return;
+      try {
+        const r = await fetch(VISIT_API + "?hit=1", { cache: "no-store" });
+        if (!r.ok) throw new Error("bad status");
+        const d = await r.json();
+        box.innerHTML = [["今日訪客", d.day], ["累積訪客", d.total]].map(([label, n]) => {
+          const L = visitLevel(n);
+          return `<span class="visit-item" title="${label}：${L.name}色燈"><span class="visit-light" style="background:${L.color};color:${L.color}"></span>${label} ${Number(n).toLocaleString()}</span>`;
+        }).join("");
+        box.style.display = "flex";
+      } catch (e) {
+        box.style.display = "none";
+      }
+    }
+    window.addEventListener("load", loadVisits);
+
     window.addEventListener("DOMContentLoaded", initApp);
   </script>
 </body>
