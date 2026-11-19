@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>TOEIC Spaced Repetition Flashcards</title>
   <style>
     :root {
@@ -822,6 +822,42 @@
     @media (hover: none) {
       .key-hint, .hint-key, .srs-key-hint { display: none; }
     }
+
+
+    /* ===== 依裝置寬度優化版面 ===== */
+    .rank-selector-wrapper { min-width: 0; }
+    .rank-dropdown { min-width: 0; flex: 1; }
+
+    /* 平板 */
+    @media (min-width: 640px) and (max-width: 899px) {
+      .app-container { max-width: 620px; }
+      .word-text { font-size: 46px; }
+      .word-ipa { font-size: 22px; }
+      .image-container { height: 190px; }
+      .word-translation { font-size: 18px; }
+      .detail-item { font-size: 15px; }
+      .example-text { font-size: 15px; }
+      .srs-btn { padding: 10px 4px; font-size: 14px; }
+    }
+
+    /* 電腦（寬螢幕） */
+    @media (min-width: 900px) {
+      body { padding-top: 24px; }
+      .app-container { max-width: 760px; }
+      .card-front { min-height: 420px; }
+      .word-text { font-size: 60px; }
+      .word-ipa { font-size: 26px; margin-top: 12px; }
+      .image-container { height: 230px; }
+      .word-translation { font-size: 21px; }
+      .detail-item { font-size: 16px; line-height: 1.5; }
+      .example-text { font-size: 16.5px; line-height: 1.55; }
+      .srs-btn { padding: 12px 6px; font-size: 15px; }
+      .ctl-btn { min-height: 48px; font-size: 15px; }
+      .data-credit { font-size: 12px; }
+    }
+
+    /* 手機瀏海／底部手勢列安全區 */
+    body { padding-bottom: max(10px, env(safe-area-inset-bottom)); }
 
     #counterText { white-space: nowrap; }
 
@@ -2822,6 +2858,7 @@
       }
     }
 
+    window.addEventListener("resize", () => { if (typeof autoFitCardHeight === "function") autoFitCardHeight(); });
     window.addEventListener("DOMContentLoaded", initApp);
   </script>
 </body>
