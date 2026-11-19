@@ -3,6 +3,9 @@
 版本規則：**小改款用小數點**（Ver.1.1、Ver.1.2…），**大改款進位為整數**（Ver.2、Ver.3…）。
 從 Ver.1 重新開始計算，之前的日期式編號（2026.11.19-N）不再使用。
 
+## Ver.5.2（小改款，2026-11-19）
+- 訪客燈號啟用：已連接 Cloudflare Worker（toeic-counter.davanr.workers.dev），同一 IP 只計一次。
+
 ## Ver.5.1（小改款，2026-11-19）
 - 加入 GoatCounter 流量統計（頁面底部追蹤碼），與 Worker 燈號並存；燈號的精準去重數字仍以 Worker 為準。
 
