@@ -2883,13 +2883,14 @@
       }
     }
 
-    // 版本資訊：每次更新網頁時修改 APP_VERSION，用來確認線上已換成新版
-    const APP_VERSION = "2026.11.19-7";
-    const APP_FEATURES = "含 IPA 音標・字首字根字尾・手機按鈕・依裝置調整版面（已還原為級距下拉選單版面）";
+    // 版本資訊：每次更新網頁時修改 APP_VERSION，用來確認線上已換成新版。
+    // 規則：小改款用小數點（Ver.1.1、Ver.1.2），大改款進位為整數（Ver.2）。
+    const APP_VERSION = "Ver.1";
+    const APP_FEATURES = "含 IPA 音標・字首字根字尾・手機按鈕・依裝置調整版面";
     (function showVersion() {
       const el = document.getElementById("appVersion");
       if (el) el.textContent = `版本 ${APP_VERSION}｜${BUILTIN_CARDS.length.toLocaleString()} 字｜${APP_FEATURES}`;
-      document.title = document.title.replace(/\s*\(v[^)]*\)$/, "") + ` (v${APP_VERSION})`;
+      document.title = document.title.replace(/\s*\((v|Ver\.)[^)]*\)$/, "") + ` (${APP_VERSION})`;
     })();
 
     window.addEventListener("resize", () => { if (typeof autoFitCardHeight === "function") autoFitCardHeight(); });
