@@ -787,6 +787,63 @@
       padding: 8px 0;
     }
 
+    .shortcuts-bar {
+      gap: 10px;
+      padding: 10px 0;
+    }
+
+    .ctl-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 44px;
+      min-width: 88px;
+      padding: 0 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      background: #ffffff;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+    }
+
+    .ctl-btn:active {
+      transform: scale(0.96);
+      background: #f1f5f9;
+    }
+
+    /* 觸控裝置：不顯示鍵盤提示 */
+    @media (hover: none) {
+      .key-hint, .hint-key, .srs-key-hint { display: none; }
+    }
+
+    #counterText { white-space: nowrap; }
+
+    /* 手機窄螢幕：級距列允許換行，避免「全庫 9698 字」被切掉 */
+    @media (max-width: 520px) {
+      .rank-bar {
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .rank-selector-wrapper {
+        min-width: 0;
+      }
+      .rank-dropdown {
+        min-width: 0;
+        max-width: 100%;
+        flex: 1;
+      }
+      .rank-stats-badge {
+        margin-left: auto;
+      }
+    }
+
     .kbd {
       background-color: #e2e8f0;
       border: 1px solid #cbd5e1;
@@ -1164,7 +1221,7 @@
           <div class="word-ipa" id="frontIpa" style="display:none"></div>
           <div class="front-hint">
             <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/></svg>
-            點擊卡片或按 <span class="kbd">Space</span> 翻面
+            點擊卡片<span class="hint-key">或按 <span class="kbd">Space</span></span>翻面
           </div>
         </div>
 
@@ -1295,12 +1352,20 @@
       </div>
     </div>
 
-    <!-- Shortcuts Footer -->
-    <div class="shortcuts-bar">
-      <span><span class="kbd">Space</span> 翻面</span>
-      <span><span class="kbd">Enter</span> 發音</span>
-      <span><span class="kbd">1</span>~<span class="kbd">4</span> 評級</span>
-      <span><span class="kbd">S</span> 洗牌</span>
+    <!-- 操作按鈕（手機可用；桌機仍可使用鍵盤快捷鍵） -->
+    <div class="shortcuts-bar" id="controlBar">
+      <button type="button" class="ctl-btn" id="ctlFlip" title="翻面 (Space)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        <span>翻面</span><span class="kbd key-hint">Space</span>
+      </button>
+      <button type="button" class="ctl-btn" id="ctlSpeak" title="發音 (Enter)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
+        <span>發音</span><span class="kbd key-hint">Enter</span>
+      </button>
+      <button type="button" class="ctl-btn" id="ctlShuffle" title="洗牌 (S)">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4l5 5m0 0l11 11m-11-11L4 20m16-16h-5m5 0v5m0 6v5h-5"/></svg>
+        <span>洗牌</span><span class="kbd key-hint">S</span>
+      </button>
     </div>
 
     <div class="data-credit">
@@ -2634,15 +2699,7 @@
         toggleFlip();
       } else if (e.key === "Enter") {
         e.preventDefault();
-        if (state.queue.length > 0) {
-          const cur = state.queue[0];
-          if (state.isFlipped) {
-            const parsed = parseBackContent(cur.word, cur.rawBack);
-            speakText(parsed.example, true);
-          } else {
-            speakText(cur.word, false);
-          }
-        }
+        speakCurrent();
       } else if (state.isFlipped) {
         if (e.key === "1") {
           e.preventDefault();
@@ -2666,6 +2723,18 @@
       }
     });
 
+    function speakCurrent() {
+      if (state.queue.length > 0) {
+        const cur = state.queue[0];
+        if (state.isFlipped) {
+          const parsed = parseBackContent(cur.word, cur.rawBack);
+          speakText(parsed.example, true);
+        } else {
+          speakText(cur.word, false);
+        }
+      }
+    }
+
     function shuffleQueue() {
       if (!state.queue || state.queue.length <= 1) {
         showToast("佇列中單字過少，無需洗牌！", "info");
@@ -2684,6 +2753,9 @@
     }
 
     document.getElementById("shuffleBtn").addEventListener("click", shuffleQueue);
+    document.getElementById("ctlFlip").addEventListener("click", () => toggleFlip());
+    document.getElementById("ctlSpeak").addEventListener("click", speakCurrent);
+    document.getElementById("ctlShuffle").addEventListener("click", shuffleQueue);
 
     /* ========================================================
        14. 初始化載入
