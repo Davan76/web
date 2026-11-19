@@ -870,6 +870,40 @@
 
     #counterText { white-space: nowrap; }
 
+    /* ===== 學習單元 ===== */
+    .rank-bar { display: none !important; }
+    .home-view { display: none; padding: 4px 0 8px; }
+    .view-home .home-view { display: block; }
+    .view-home .counter-group, .view-home .progress-container, .view-home #shuffleBtn,
+    .view-home #cardWrapper, .view-home #completionView, .view-home #controlBar, .view-home #unitBar { display: none !important; }
+    .home-title { font-size: 22px; font-weight: 800; color: #1e293b; margin: 6px 4px 2px; }
+    .home-sub { font-size: 13px; color: #64748b; margin: 0 4px 10px; }
+    .home-group { font-size: 12.5px; font-weight: 800; color: #475569; margin: 14px 4px 6px; letter-spacing: 0.3px; }
+    .unit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+    .unit-card { text-align: left; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px 14px;
+      cursor: pointer; font-family: inherit; touch-action: manipulation; box-shadow: 0 1px 3px rgba(15,23,42,0.06); -webkit-tap-highlight-color: transparent; }
+    .unit-card:active { transform: scale(0.98); background: #f8fafc; }
+    .unit-card .u-top { display: flex; align-items: center; gap: 8px; }
+    .unit-card .u-icon { font-size: 20px; line-height: 1; }
+    .unit-card .u-title { font-size: 15px; font-weight: 800; color: #0f172a; }
+    .unit-card .u-sub { font-size: 12px; color: #64748b; margin: 2px 0 8px 28px; }
+    .unit-card .u-bar { height: 6px; background: #e2e8f0; border-radius: 99px; overflow: hidden; }
+    .unit-card .u-fill { height: 100%; background: #22c55e; border-radius: 99px; }
+    .unit-card .u-meta { display: flex; justify-content: space-between; font-size: 12px; color: #475569; margin-top: 6px; font-weight: 700; }
+    .unit-bar { display: flex; align-items: center; gap: 10px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px;
+      padding: 6px 10px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .unit-back { border: 1px solid #cbd5e1; background: #f8fafc; color: #334155; border-radius: 8px; padding: 6px 10px; min-height: 36px;
+      font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; touch-action: manipulation; white-space: nowrap; }
+    .unit-title { flex: 1; font-size: 14px; font-weight: 800; color: #0f172a; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .unit-grid > :only-child { grid-column: 1 / -1; }
+    @media (max-width: 520px) {
+      .unit-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .unit-card { padding: 10px 11px; }
+      .unit-card .u-sub { margin-left: 0; }
+      .unit-card .u-title { font-size: 14.5px; }
+    }
+    @media (min-width: 900px) { .unit-grid { grid-template-columns: repeat(3, 1fr); } .home-title { font-size: 26px; } }
+
     /* 手機窄螢幕：級距列允許換行，避免「全庫 9698 字」被切掉 */
     @media (max-width: 520px) {
       .rank-bar {
@@ -1221,7 +1255,21 @@
       </div>
     </div>
 
-    <!-- TOEIC Rank 目標級距選擇列 -->
+    <!-- 學習單元清單（首頁） -->
+    <div class="home-view" id="homeView">
+      <h1 class="home-title">學習單元</h1>
+      <p class="home-sub" id="homeSummary"></p>
+      <div id="unitList"></div>
+    </div>
+
+    <!-- 目前單元列 -->
+    <div class="unit-bar" id="unitBar">
+      <button type="button" class="unit-back" id="unitBackBtn">← 單元</button>
+      <span class="unit-title" id="unitTitle"></span>
+      <span class="rank-stats-badge" id="unitRemain"></span>
+    </div>
+
+    <!-- TOEIC Rank 目標級距選擇列（已由「單元」取代，保留隱藏以相容舊程式） -->
     <div class="rank-bar" id="rankBar">
       <div class="rank-selector-wrapper">
         <span class="rank-icon-badge">🎯</span>
@@ -1597,6 +1645,9 @@
 
     let state = {
       allCards: [],
+      mastered: {},      // 單字 -> 1：在任何單元按過 Easy，所有單元共用
+      units: {},         // 單元 id -> { queue: [單字...], stats: {...} }
+      currentUnit: null, // null = 在單元清單（首頁）
       selectedRank: "all",
       queue: [],
       initialTotal: 0,
@@ -1636,6 +1687,7 @@
 
     async function saveStateToDB() {
       try {
+        syncUnit();
         const db = await openDB();
         const payload = JSON.stringify(state);
         if (db) {
@@ -2008,6 +2060,7 @@
     function filterCardsByRank(cards, rankVal) {
       if (!cards || cards.length === 0) return [];
       if (!rankVal || rankVal === "all") return [...cards];
+      if (rankVal === "custom") return cards.filter(c => c.score === "自訂");
 
       if (rankVal.startsWith("score_")) {
         const targetScore = rankVal.replace("score_", "");
@@ -2038,6 +2091,7 @@
         case "star_5": return "5 星超核心高頻";
         case "star_4": return "4 星重要常用";
         case "star_3": return "3 星常用字彙";
+        case "custom": return "自訂字卡";
         case "all":
         default:
           return "不用指定 (全範圍高頻)";
@@ -2285,7 +2339,8 @@
       countGood.textContent = state.stats.good;
       countEasy.textContent = state.stats.easy;
 
-      const finishedCount = state.stats.easy;
+      const finishedCount = state.initialTotal - state.queue.length;
+      updateUnitBar();
       const progressPercent = state.initialTotal > 0 ? Math.min(100, Math.round((finishedCount / state.initialTotal) * 100)) : 0;
       progressBar.style.width = `${progressPercent}%`;
     }
@@ -2319,6 +2374,8 @@
         state.queue.push(currentCard);
       } else if (rating === "easy") {
         state.stats.easy++;
+        if (!state.mastered) state.mastered = {};
+        state.mastered[currentCard.word.toLowerCase()] = 1;
       }
 
       state.isFlipped = false;
@@ -2343,7 +2400,7 @@
       document.getElementById("statGood").textContent = state.stats.good;
       document.getElementById("statEasy").textContent = state.stats.easy;
 
-      const rankTitle = getRankDisplayLabel(state.selectedRank || "all");
+      const rankTitle = unitTitle(state.currentUnit || state.selectedRank || "all");
       document.getElementById("completionSummary").textContent = `您已複習完【${rankTitle}】的所有單字！`;
 
       counterText.textContent = `${state.initialTotal} / ${state.initialTotal}`;
@@ -2354,16 +2411,11 @@
     }
 
     function restartDeck() {
-      const filtered = filterCardsByRank(state.allCards, state.selectedRank || "all");
-      state.queue = [...filtered];
-      state.initialTotal = filtered.length;
-      state.stats = { again: 0, hard: 0, good: 0, easy: 0 };
-      state.isFlipped = false;
-      imagePreloadCache.clear();
-      preloadUpcomingCards();
-      saveStateToDB();
-      renderCurrentCard();
-      showToast("已重新開始本單元學習！", "info");
+      const id = state.currentUnit || state.selectedRank || "all";
+      for (const c of filterCardsByRank(state.allCards, id)) delete state.mastered[c.word.toLowerCase()];
+      delete state.units[id];
+      openUnit(id);
+      showToast("已重新開始本單元（本單元單字的「已熟」標記已清除）！", "info");
     }
 
     /* ========================================================
@@ -2400,6 +2452,8 @@
 
         state.allCards = validCards;
         state.selectedRank = "all";
+        state.mastered = {};
+        state.units = {};
         state.queue = [...validCards];
         state.initialTotal = validCards.length;
         state.stats = { again: 0, hard: 0, good: 0, easy: 0 };
@@ -2408,10 +2462,8 @@
 
         updateRankDropdownCounts();
         imagePreloadCache.clear();
-        preloadUpcomingCards();
 
-        saveStateToDB();
-        renderCurrentCard();
+        goHome();
         showToast(`成功匯入 ${validCards.length} 張單字卡！`, "success");
         return true;
       } catch (err) {
@@ -2431,6 +2483,8 @@
       state.selectedRank = "all";
       const rankSelect = document.getElementById("rankSelect");
       if (rankSelect) rankSelect.value = "all";
+      state.mastered = {};
+      state.units = {};
       state.queue = [...state.allCards];
       state.initialTotal = state.allCards.length;
       state.stats = { again: 0, hard: 0, good: 0, easy: 0 };
@@ -2439,10 +2493,8 @@
 
       updateRankDropdownCounts();
       imagePreloadCache.clear();
-      preloadUpcomingCards();
-      saveStateToDB();
       closeModal("uploadModal");
-      renderCurrentCard();
+      goHome();
       showToast("已還原載入官方完整 9,698 題多益字庫！", "success");
     }
 
@@ -2636,15 +2688,8 @@
     document.getElementById("btnEasy").addEventListener("click", () => handleSRS("easy"));
 
     document.getElementById("btnRestart").addEventListener("click", restartDeck);
-    document.getElementById("btnSwitchRank").addEventListener("click", () => {
-      completionView.style.display = "none";
-      cardWrapper.style.display = "block";
-      const rs = document.getElementById("rankSelect");
-      if (rs) {
-        rs.focus();
-        document.getElementById("rankBar")?.scrollIntoView({ behavior: "smooth" });
-      }
-    });
+    document.getElementById("btnSwitchRank").addEventListener("click", () => goHome());
+    document.getElementById("unitBackBtn").addEventListener("click", () => goHome());
     document.getElementById("btnImportNew").addEventListener("click", () => {
       openModal("uploadModal");
     });
@@ -2739,6 +2784,7 @@
 
     // 鍵盤快捷鍵
     document.addEventListener("keydown", (e) => {
+      if (!state.currentUnit) return;   // 在單元清單時不處理快捷鍵
       if (document.querySelector(".modal-overlay[style*='display: flex']")) {
         if (e.key === "Escape") {
           document.querySelectorAll(".modal-overlay").forEach(m => m.style.display = "none");
@@ -2812,6 +2858,139 @@
     /* ========================================================
        14. 初始化載入
        ======================================================== */
+    /* ========================================================
+       單元 (Units)
+       ======================================================== */
+    const UNIT_GROUPS = [
+      { title: "全部", units: [{ id: "all", icon: "🌟", title: "全部單字", sub: "全庫高頻" }] },
+      { title: "多益分數級距 (TOEIC Score)", units: [
+        { id: "score_0-400", icon: "🟢", title: "0 - 400 分", sub: "基礎入門" },
+        { id: "score_400-600", icon: "🔵", title: "400 - 600 分", sub: "初中級商務" },
+        { id: "score_600-780", icon: "🟣", title: "600 - 780 分", sub: "中高級實務" },
+        { id: "score_780-900", icon: "🟡", title: "780 - 900 分", sub: "金色證照必備" },
+        { id: "score_900+", icon: "👑", title: "900+ 分", sub: "高階菁英頂標" } ] },
+      { title: "重要度星級 (Star Rank)", units: [
+        { id: "star_5", icon: "⭐", title: "5 星", sub: "核心單字" },
+        { id: "star_4", icon: "⭐", title: "4 星", sub: "重要單字" },
+        { id: "star_3", icon: "⭐", title: "3 星", sub: "常用單字" } ] },
+      { title: "自訂", units: [{ id: "custom", icon: "✏️", title: "自訂字卡", sub: "自己加入的字卡" }] }
+    ];
+    const UNIT_BY_ID = {};
+    UNIT_GROUPS.forEach(g => g.units.forEach(u => { UNIT_BY_ID[u.id] = u; }));
+
+    function unitTitle(id) {
+      const u = UNIT_BY_ID[id];
+      return u ? `${u.icon} ${u.title}（${u.sub}）` : "單字";
+    }
+
+    function syncUnit() {
+      if (!state.currentUnit) return;
+      if (!state.units) state.units = {};
+      state.units[state.currentUnit] = { queue: state.queue.map(c => c.word), stats: { ...state.stats } };
+    }
+
+    function updateUnitBar() {
+      const t = document.getElementById("unitTitle");
+      const r = document.getElementById("unitRemain");
+      const u = UNIT_BY_ID[state.currentUnit || state.selectedRank];
+      if (t) { t.textContent = u ? `${u.icon} ${u.title}` : "單字"; t.title = unitTitle(state.currentUnit || state.selectedRank); }
+      if (r) r.textContent = `剩 ${state.queue.length} 字`;
+    }
+
+    function renderHome() {
+      const box = document.getElementById("unitList");
+      if (!box) return;
+      const mastered = state.mastered || {};
+      const all = state.allCards || [];
+      const doneAll = all.filter(c => mastered[c.word.toLowerCase()]).length;
+      document.getElementById("homeSummary").textContent =
+        `共 ${all.length.toLocaleString()} 字，已熟悉 ${doneAll.toLocaleString()} 字。選一個單元開始學習；任何單元按 Easy 的單字，其他單元也會視為已熟。`;
+      box.innerHTML = "";
+      for (const g of UNIT_GROUPS) {
+        const items = g.units.map(u => {
+          const cards = filterCardsByRank(all, u.id);
+          return { u, total: cards.length, done: cards.filter(c => mastered[c.word.toLowerCase()]).length };
+        }).filter(x => x.total > 0);
+        if (!items.length) continue;
+        const h3 = document.createElement("div");
+        h3.className = "home-group";
+        h3.textContent = g.title;
+        box.appendChild(h3);
+        const grid = document.createElement("div");
+        grid.className = "unit-grid";
+        for (const { u, total, done } of items) {
+          const pct = total ? Math.round(done / total * 100) : 0;
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "unit-card";
+          b.dataset.unit = u.id;
+          b.innerHTML = `<div class="u-top"><span class="u-icon">${u.icon}</span><span class="u-title">${u.title}</span></div>
+            <div class="u-sub">${u.sub}</div>
+            <div class="u-bar"><div class="u-fill" style="width:${pct}%"></div></div>
+            <div class="u-meta"><span>已熟 ${done.toLocaleString()} / ${total.toLocaleString()}</span><span>${pct}%</span></div>`;
+          b.addEventListener("click", () => openUnit(u.id));
+          grid.appendChild(b);
+        }
+        box.appendChild(grid);
+      }
+    }
+
+    function goHome() {
+      syncUnit();
+      state.currentUnit = null;
+      state.isFlipped = false;
+      document.body.classList.add("view-home");
+      renderHome();
+      saveStateToDB();
+      window.scrollTo(0, 0);
+    }
+
+    function openUnit(id) {
+      const cards = filterCardsByRank(state.allCards, id);
+      if (cards.length === 0) { showToast("這個單元沒有單字。", "error"); return; }
+      const mastered = state.mastered || {};
+      const byWord = new Map(cards.map(c => [c.word.toLowerCase(), c]));
+      const saved = state.units && state.units[id];
+      let queue = [];
+      const inQueue = new Set();
+      if (saved && Array.isArray(saved.queue)) {
+        for (const w of saved.queue) {
+          const k = w.toLowerCase();
+          if (byWord.has(k) && !mastered[k] && !inQueue.has(k)) { queue.push(byWord.get(k)); inQueue.add(k); }
+        }
+        // 單元建立後新增的字卡（例如新加的自訂字卡）：補到最前面
+        const fresh = cards.filter(c => !mastered[c.word.toLowerCase()] && !inQueue.has(c.word.toLowerCase()));
+        queue = [...fresh, ...queue];
+        state.stats = saved.stats ? { ...saved.stats } : { again: 0, hard: 0, good: 0, easy: 0 };
+      } else {
+        queue = cards.filter(c => !mastered[c.word.toLowerCase()]);
+        state.stats = { again: 0, hard: 0, good: 0, easy: 0 };
+      }
+      state.currentUnit = id;
+      state.selectedRank = id;
+      state.queue = queue;
+      state.initialTotal = cards.length;
+      state.isFlipped = false;
+      document.body.classList.remove("view-home");
+      imagePreloadCache.clear();
+      updateUnitBar();
+      saveStateToDB();
+      if (state.queue.length === 0) showCompletionScreen();
+      else { preloadUpcomingCards(); renderCurrentCard(); }
+      window.scrollTo(0, 0);
+    }
+
+    // 舊版（只有一份佇列）的進度升級為單元制：不在佇列裡的單字視為已按過 Easy
+    function migrateToUnits(s) {
+      if (s.units && s.mastered) return;
+      s.units = {}; s.mastered = {};
+      const rank = s.selectedRank || "all";
+      const scope = filterCardsByRank(s.allCards || [], rank);
+      const q = new Set((s.queue || []).map(c => c.word.toLowerCase()));
+      for (const c of scope) { if (!q.has(c.word.toLowerCase())) s.mastered[c.word.toLowerCase()] = 1; }
+      s.units[rank] = { queue: (s.queue || []).map(c => c.word), stats: s.stats ? { ...s.stats } : { again: 0, hard: 0, good: 0, easy: 0 } };
+    }
+
     async function initApp() {
       const saved = await loadStateFromDB();
       
@@ -2846,7 +3025,9 @@
           }
         }
 
+        migrateToUnits(saved);
         state = saved;
+        state.currentUnit = null;
         if (!state.selectedRank) state.selectedRank = "all";
         if (!state.audioSettings) {
           state.audioSettings = { exampleRate: 1.0, autoPlayExample: true, repeatCount: 1, selectedVoice: "" };
@@ -2875,17 +3056,14 @@
       }
 
       updateRankDropdownCounts();
-
-      if (state.queue.length === 0) {
-        showCompletionScreen();
-      } else {
-        renderCurrentCard();
-      }
+      if (!state.mastered) state.mastered = {};
+      if (!state.units) state.units = {};
+      goHome();
     }
 
     // 版本資訊：每次更新網頁時修改 APP_VERSION，用來確認線上已換成新版
-    const APP_VERSION = "2026.11.19-5";
-    const APP_FEATURES = "含 IPA 音標・字首字根字尾・手機按鈕・依裝置調整版面";
+    const APP_VERSION = "2026.11.19-6";
+    const APP_FEATURES = "學習單元・IPA 音標・字首字根字尾・手機按鈕";
     (function showVersion() {
       const el = document.getElementById("appVersion");
       if (el) el.textContent = `版本 ${APP_VERSION}｜${BUILTIN_CARDS.length.toLocaleString()} 字｜${APP_FEATURES}`;
