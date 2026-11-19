@@ -489,6 +489,15 @@
       padding: 6px 16px 10px;
     }
 
+    .app-version {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748b;
+      padding: 0 16px 12px;
+      letter-spacing: 0.2px;
+    }
+
     .data-credit a {
       color: inherit;
     }
@@ -1403,6 +1412,8 @@
         <span>洗牌</span><span class="kbd key-hint">S</span>
       </button>
     </div>
+
+    <div class="app-version" id="appVersion">版本載入中…</div>
 
     <div class="data-credit">
       單字資料：<a href="https://huggingface.co/datasets/kknono668/toeic-vocab-tw" target="_blank" rel="noopener">kknono668/toeic-vocab-tw</a>
@@ -2857,6 +2868,15 @@
         renderCurrentCard();
       }
     }
+
+    // 版本資訊：每次更新網頁時修改 APP_VERSION，用來確認線上已換成新版
+    const APP_VERSION = "2026.11.19-3";
+    const APP_FEATURES = "含 IPA 音標・字首字根字尾・手機按鈕・依裝置調整版面";
+    (function showVersion() {
+      const el = document.getElementById("appVersion");
+      if (el) el.textContent = `版本 ${APP_VERSION}｜${BUILTIN_CARDS.length.toLocaleString()} 字｜${APP_FEATURES}`;
+      document.title = document.title.replace(/\s*\(v[^)]*\)$/, "") + ` (v${APP_VERSION})`;
+    })();
 
     window.addEventListener("resize", () => { if (typeof autoFitCardHeight === "function") autoFitCardHeight(); });
     window.addEventListener("DOMContentLoaded", initApp);
